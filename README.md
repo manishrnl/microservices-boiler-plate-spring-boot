@@ -34,13 +34,7 @@ Production-shaped Spring Boot microservices boilerplate for local development wi
 
 The Docker build uses Java 26 inside the Maven builder image, so you can run the platform even if your host Java version is older.
 
-## Configuration
 
-Create your local environment file:
-
-```powershell
-Copy-Item .env.example .env
-```
 
 Default `.env` values are enough to run the full platform locally. No paid API keys are required.
 
