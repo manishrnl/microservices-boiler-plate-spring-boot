@@ -65,8 +65,6 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
       KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
-    volumes:
-      - kafka-data:/tmp/kraft-combined-logs
     healthcheck:
       test: ["CMD-SHELL", "/opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --list >/dev/null 2>&1"]
       interval: 10s
@@ -312,7 +310,6 @@ volumes:
   postgres-data:
   pgadmin-data:
   redis-data:
-  kafka-data:
   ollama-data:
   prometheus-data:
   grafana-data:

@@ -3,3 +3,44 @@ spring:
     name: notification-services
   config:
     import: optional:configserver:${CONFIG_SERVER_URL:http://localhost:8888}
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/microservices_db}
+    username: ${SPRING_DATASOURCE_USERNAME:microservice_user}
+    password: ${SPRING_DATASOURCE_PASSWORD:microservice_password}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    consumer:
+      group-id: notification-services
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+        spring.json.use.type.headers: false
+        spring.json.value.default.type: com.boilerplate.platform.notification.dto.PaymentEvent
+  mail:
+    host: ${SPRING_MAIL_HOST:${MAIL_HOST:localhost}}
+    port: ${SPRING_MAIL_PORT:${MAIL_PORT:1025}}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://localhost:8761/eureka/}
+
+app:
+  kafka:
+    topics:
+      payment-events: ${PAYMENT_EVENTS_TOPIC:payment-events}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus

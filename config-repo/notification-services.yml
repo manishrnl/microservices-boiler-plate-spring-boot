@@ -27,8 +27,8 @@ spring:
         spring.json.use.type.headers: false
         spring.json.value.default.type: com.boilerplate.platform.notification.dto.PaymentEvent
   mail:
-    host: ${MAIL_HOST:localhost}
-    port: ${MAIL_PORT:1025}
+    host: ${SPRING_MAIL_HOST:${MAIL_HOST:localhost}}
+    port: ${SPRING_MAIL_PORT:${MAIL_PORT:1025}}
 
 app:
   kafka:
@@ -39,4 +39,4 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info,metrics
+        include: health,info,metrics,prometheus
