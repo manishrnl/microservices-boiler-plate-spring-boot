@@ -1,0 +1,37 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: true
+              lower-case-service-id: true
+          routes:
+            - id: payment-services
+              uri: lb://payment-services
+              predicates:
+                - Path=/api/payments/**
+            - id: notification-services
+              uri: lb://notification-services
+              predicates:
+                - Path=/api/notifications/**
+            - id: ai-services
+              uri: lb://ai-services
+              predicates:
+                - Path=/api/ai/**
+            - id: security-services
+              uri: lb://security-services
+              predicates:
+                - Path=/api/auth/**
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,gateway

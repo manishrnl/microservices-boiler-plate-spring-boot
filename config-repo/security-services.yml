@@ -1,0 +1,27 @@
+server:
+  port: ${SERVER_PORT:8084}
+
+spring:
+  application:
+    name: security-services
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/microservices_db}
+    username: ${SPRING_DATASOURCE_USERNAME:microservice_user}
+    password: ${SPRING_DATASOURCE_PASSWORD:microservice_password}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+
+app:
+  security:
+    max-sessions-per-user: ${MAX_SESSIONS_PER_USER:5}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics

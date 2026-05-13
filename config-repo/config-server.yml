@@ -1,0 +1,14 @@
+server:
+  port: ${SERVER_PORT:8888}
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: ${CONFIG_GIT_URI:https://github.com/manishrnl/microservices-boiler-plate-config-server.git}
+          default-label: ${CONFIG_GIT_DEFAULT_LABEL:main}
+          clone-on-start: true
+          force-pull: true

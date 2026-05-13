@@ -10,4 +10,4 @@ target/
 mvnw
 mvnw.cmd
 *.log
-.env
+

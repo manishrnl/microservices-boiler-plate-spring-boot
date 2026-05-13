@@ -10,8 +10,15 @@ Reusable Java 26 / Spring Boot 4 boilerplate with:
 - `ai-services` on port `8083`
 - `security-services` on port `8084`
 - PostgreSQL, Redis, Kafka, and Ollama in Docker Compose
+- pgAdmin, Kafka UI, Mailpit, Zipkin, Prometheus, Loki, Promtail, and Grafana for local development
 
 ## Run with Docker Compose
+
+Create local environment values:
+
+```bash
+cp .env.example .env
+```
 
 Download/pull base images first:
 
@@ -19,17 +26,35 @@ Download/pull base images first:
 docker compose pull
 ```
 
-Build the custom service images:
-
-```bash
-docker compose build
-```
-
 Start everything:
 
 ```bash
 docker compose up --build
 ```
+
+## Local URLs
+
+- API Gateway: `http://localhost:8080`
+- Config Server: `http://localhost:8888`
+- Eureka Dashboard: `http://localhost:8761`
+- pgAdmin: `http://localhost:5050`
+- Kafka UI: `http://localhost:8090`
+- Mailpit: `http://localhost:8025`
+- Zipkin: `http://localhost:9411`
+- Prometheus: `http://localhost:9090`
+- Grafana: `http://localhost:3000`
+- Loki: `http://localhost:3100`
+- Ollama: `http://localhost:11434`
+
+## Observability
+
+Grafana is preconfigured with:
+
+- Prometheus for service metrics from `/actuator/prometheus`
+- Loki for Docker container logs and error search
+- Zipkin for request traces
+
+Open Grafana at `http://localhost:3000`. The default local login is `admin` / `admin`.
 
 The config server reads from:
 
